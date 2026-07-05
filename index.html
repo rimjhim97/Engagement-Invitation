@@ -473,8 +473,8 @@ console.error("Audio couldn't start:", err);
 }
 }
         
-        window.addEventListener('click', startAudio);
-        window.addEventListener('pointerup', startAudio);
+window.addEventListener('touchstart', startAudio, { once: true });
+window.addEventListener('scroll', startAudio, { once: true });
 
         // --- Smooth Scroll & Single Sparkle Observer ---
         let sparkleFired = false;
