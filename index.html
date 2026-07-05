@@ -468,9 +468,8 @@
             }
         }
         
-        window.addEventListener('scroll', startAudio, { once: true });
-        window.addEventListener('touchstart', startAudio, { once: true });
-        window.addEventListener('click', startAudio, { once: true });
+        window.addEventListener('click', startAudio);
+        window.addEventListener('pointerup', startAudio);
 
         // --- Smooth Scroll & Single Sparkle Observer ---
         let sparkleFired = false;
