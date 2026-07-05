@@ -459,14 +459,19 @@
 
         // --- Invisible Audio Trigger ---
         let audioStarted = false;
-        const bgMusic = document.getElementById('bgMusic');
+const bgMusic = document.getElementById('bgMusic');
 
-        function startAudio() {
-            if (!audioStarted) {
-                bgMusic.play().catch(() => console.log("Please ensure a valid audio file is linked."));
-                audioStarted = true;
-            }
-        }
+async function startAudio() {
+if (audioStarted) return;
+
+try {
+await bgMusic.play();
+audioStarted = true;
+console.log("Music started successfully");
+} catch (err) {
+console.error("Audio couldn't start:", err);
+}
+}
         
         window.addEventListener('click', startAudio);
         window.addEventListener('pointerup', startAudio);
