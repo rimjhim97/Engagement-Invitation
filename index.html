@@ -131,7 +131,14 @@
     text-shadow:
         0 2px 10px rgba(0,0,0,.75);
 }
+.chapter-line{
+    width:65px;
+    height:1px;
 
+    background:rgba(230,203,168,.45);
+
+    margin:8px 0 12px;
+}
         .story-text {
             font-family: 'Cormorant Garamond', serif;
             font-size: clamp(1.4rem, 4.5vw, 2rem);
@@ -346,12 +353,15 @@
         }
 
         /* --- Cinematic Reveal Animations --- */
-        .anim-element {
-            opacity: 0;
-            transform: translateY(30px);
+        .anim-element{
+    opacity:0;
+    transform:translateY(45px) scale(.96);
             transition: opacity 1.8s cubic-bezier(0.25, 1, 0.5, 1), transform 1.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
-        .anim-element.visible { opacity: 1; transform: translateY(0); }
+       .anim-element.visible{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
 
         .delay-1 { transition-delay: 0.2s; }
         .delay-2 { transition-delay: 0.4s; }
@@ -396,6 +406,7 @@
         <div class="bg-layer"></div>
         <div class="chapter-wrapper anim-element" style="margin-top:-70px;">
             <h3 class="chapter-title">Chapter One</h3>
+            <div class="chapter-line"></div>
             <span class="year-marker">A City of Stars</span>
         </div>
         <p class="story-text anim-element delay-1">
@@ -409,6 +420,7 @@
         <div class="proposal-sparkle" id="sparkle"></div>
         <div class="chapter-wrapper anim-element" style="margin-top:-70px;">
             <h3 class="chapter-title">Chapter Two</h3>
+            <div class="chapter-line"></div>
             <span class="year-marker">The Fools Who Dream</span>
         </div>
         <div class="climax-text anim-element delay-1">
