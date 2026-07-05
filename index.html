@@ -389,6 +389,18 @@
         .delay-2 { transition-delay: 0.4s; }
         .delay-3 { transition-delay: 0.6s; }
         .delay-4 { transition-delay: 0.8s; }
+        /* --- Section Zoom Transition --- */
+.section {
+    transition: transform 1.4s ease;
+}
+
+.section.in-view {
+    transform: scale(1);
+}
+
+.section:not(.in-view) {
+    transform: scale(1.02);
+}
 
         /* --- Cinematic Dust Motes --- */
         .dust-mote {
@@ -558,6 +570,30 @@ window.addEventListener('scroll', startAudio, { once: true });
         document.querySelectorAll('.anim-element').forEach(el => observer.observe(el));
         // Also observe scene-2 wrapper for the sparkle trigger
         observer.observe(document.getElementById('scene-2'));
+        // Observe elements for fade reveal
+document.querySelectorAll('.anim-element').forEach(el => observer.observe(el));
+
+// Also observe scene-2 wrapper for the sparkle trigger
+observer.observe(document.getElementById('scene-2'));
+
+/* --- Section Zoom Observer --- */
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+        } else {
+            entry.target.classList.remove('in-view');
+        }
+    });
+}, {
+    threshold: 0.3
+});
+
+document.querySelectorAll('.section').forEach(section => {
+    sectionObserver.observe(section);
+});
+
+document.querySelector('.section')?.classList.add('in-view');
 
         // --- Generate .ics File for Calendar with Human Description ---
         document.getElementById('addToCalendar').addEventListener('click', function(e) {
