@@ -45,29 +45,54 @@
             scroll-behavior: smooth;
         }
 
+        body.no-scroll {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+
         /* --- Cinematic Backgrounds --- */
         .bg-layer {
             position: absolute;
-            top: -10%; left: -10%; width: 120%; height: 120%; 
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
             background-size: cover;
             background-position: center center;
             z-index: -1;
-            animation: slowZoom 35s linear infinite alternate;
         }
 
         .sec-1 .bg-layer { 
             background-image: linear-gradient(to bottom, rgba(40, 20, 15, 0.4), rgba(20, 10, 10, 0.7)), url('Gemini_Generated_Image_fljzz3fljzz3fljz.png'); 
+            background-position: center 50%;
+            animation: slowZoom1 35s linear infinite alternate;
         }
         .sec-2 .bg-layer { 
-            background-image: linear-gradient(to bottom, rgba(15, 8, 5, 0.6), rgba(15, 8, 5, 0.8)), url('Gemini_Generated_Image_u28xj5u28xj5u28x.png'); 
+            background-image: linear-gradient(to bottom, rgba(15, 8, 5, 0.5), rgba(15, 8, 5, 0.75)), url('Gemini_Generated_Image_u28xj5u28xj5u28x.png'); 
+            background-position: center 40%;
+            animation: slowZoom2 35s linear infinite alternate;
+        }
+
+        @media (max-width: 768px) {
+            .sec-2 .bg-layer {
+                background-image: linear-gradient(to bottom, rgba(15, 8, 5, 0.5), rgba(15, 8, 5, 0.75)), url('chapter2cropped.png');
+            }
         }
         .sec-3 .bg-layer { 
             background-image: linear-gradient(to bottom, rgba(30, 15, 10, 0.5), rgba(10, 5, 5, 0.8)), url('ChatGPT Image Jul 5, 2026, 12_26_29 PM.png'); 
+            background-position: center 50%;
+            animation: slowZoom3 35s linear infinite alternate;
         }
 
-        @keyframes slowZoom { 
+        @keyframes slowZoom1 { 
             0% { transform: scale(1); } 
-            100% { transform: scale(1.15); } 
+            100% { transform: scale(1.05); } 
+        }
+        @keyframes slowZoom2 { 
+            0% { transform: scale(1); } 
+            100% { transform: scale(1.05); } 
+        }
+        @keyframes slowZoom3 { 
+            0% { transform: scale(1); } 
+            100% { transform: scale(1.05); } 
         }
 
         /* --- Layout & Sections --- */
@@ -207,8 +232,8 @@
         /* --- The Handcrafted Invitation Card --- */
         .invite-card {
             background: var(--paper-bg);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             border: 1px solid rgba(184, 151, 104, 0.15);
             border-radius: 4px;
             padding: clamp(50px, 8vw, 70px) clamp(30px, 6vw, 60px);
@@ -429,7 +454,7 @@
     <style>
         #landing-overlay {
             position: fixed;
-            inset: 0; /* Shorthand for top:0; right:0; bottom:0; left:0; */
+            inset: 0;
             width: 100vw;
             height: 100vh;
             height: 100svh;
@@ -441,6 +466,7 @@
             align-items: center;
             text-align: center;
             overflow: hidden;
+            cursor: pointer;
             /* Master transition for the entire overlay */
             transition: opacity 1.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.8s;
         }
@@ -448,7 +474,7 @@
         /* Cinematic slow zoom background to match your base code */
         #landing-bg {
             position: absolute;
-            top: -10%; left: -10%; width: 120%; height: 120%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image: linear-gradient(to bottom, rgba(20, 10, 10, 0.2), rgba(10, 5, 5, 0.95)), url('Gemini_Generated_Image_5x30wo5x30wo5x30.png');
             background-size: cover;
             background-position: center;
@@ -456,6 +482,12 @@
             animation: slowZoom 35s linear infinite alternate;
             /* Transition for the exit blur and scale effect */
             transition: transform 1.8s cubic-bezier(0.25, 1, 0.5, 1), filter 1.8s ease;
+        }
+
+        @media (max-width: 768px) {
+            #landing-bg {
+                background-image: linear-gradient(to bottom, rgba(20, 10, 10, 0.2), rgba(10, 5, 5, 0.95)), url('startImageCropped.png');
+            }
         }
         @keyframes imageReveal {
             100% { opacity: 1; }
@@ -504,47 +536,6 @@
             opacity: 0;
         }
 
-        #enter-btn {
-            background: transparent;
-            border: 1px solid rgba(230, 203, 168, 0.4);
-            color: #e6cba8;
-            padding: 16px 42px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-            font-weight: 400;
-            animation: fadeUpIn 2.5s ease forwards 0.9s;
-            opacity: 0;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-        }
-
-        /* Subtle light sweep on hover for the button */
-        #enter-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(230, 203, 168, 0.15), transparent);
-            transition: left 0.7s ease;
-        }
-        
-        #enter-btn:hover::before {
-            left: 100%;
-        }
-
-        #enter-btn:hover {
-            background: rgba(230, 203, 168, 0.08);
-            border-color: #e6cba8;
-            color: #fff;
-            box-shadow: 0 0 25px rgba(230, 203, 168, 0.15);
-        }
-
         @keyframes fadeUpIn {
             0% { opacity: 0; transform: translateY(25px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -572,31 +563,45 @@
         <div id="landing-content">
             <div class="sub-heading">A Story Continues</div>
             <h1>Mayukh & Bhaswati</h1>
-            <p>Turn on your sound & step inside...</p>
-            <button id="enter-btn">Begin Chapter One</button>
+            <p>Tap anywhere to begin</p>
         </div>
     </div>
 
     <script>
-        document.getElementById('enter-btn').addEventListener('click', function() {
+        // Lock scroll while overlay is visible
+        document.body.classList.add('no-scroll');
+
+        (function() {
             const overlay = document.getElementById('landing-overlay');
             const bgMusic = document.getElementById('bgMusic');
-            
-            // 1. Ignite the audio engine immediately on interaction
-            if (bgMusic) {
-                bgMusic.play().catch(error => console.log("Audio play failed:", error));
-            }
-            
-            // 2. Trigger the high-end exit animation
-            overlay.classList.add('overlay-fade-out');
-            
-            // 3. Purge from DOM gracefully after animation completes
-            setTimeout(() => {
-                if (overlay.parentNode) {
-                    overlay.parentNode.removeChild(overlay);
+            let started = false;
+
+            function beginExperience() {
+                if (started) return;
+                started = true;
+
+                // Start music immediately on user gesture
+                if (bgMusic) {
+                    bgMusic.play().catch(error => console.log("Audio play failed:", error));
                 }
-            }, 1800); // Matches the CSS transition time
-        });
+
+                // Unlock scrolling
+                document.body.classList.remove('no-scroll');
+                window.scrollTo(0, 0);
+
+                // Fade out overlay
+                overlay.classList.add('overlay-fade-out');
+                setTimeout(() => {
+                    if (overlay.parentNode) {
+                        overlay.parentNode.removeChild(overlay);
+                    }
+                }, 1800);
+            }
+
+            // Trigger on any tap/click on the overlay
+            overlay.addEventListener('click', beginExperience);
+            overlay.addEventListener('touchstart', beginExperience, { passive: true });
+        })();
     </script>
     <!-- ========================================== -->
     <!-- END OF PREMIUM LANDING OVERLAY             -->
